@@ -20,8 +20,11 @@ namespace MobileApp
 
             Container = container;
 
+            var initialPage = new NavigationPage(new MainPage());
+            var navigationService = container.GetInstance<INavigationService>();
+            navigationService.Init(initialPage);
 
-            MainPage = new MainPage();
+            MainPage = initialPage;
         }
 
         protected override void OnStart()
