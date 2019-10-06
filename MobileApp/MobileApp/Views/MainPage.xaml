@@ -5,12 +5,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="MobileApp.MainPage">
-
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Praca inżynierska v0.1" 
+    <AbsoluteLayout>
+        <StackLayout>
+            <Label Text="Praca inżynierska v0.1" 
            HorizontalOptions="Center"
            VerticalOptions="CenterAndExpand" />
-    </StackLayout>
 
+        </StackLayout>
+        <ImageButton Source="outline_add_24.xml"
+                     BackgroundColor="{StaticResource PrimaryColor}" 
+                     CornerRadius="30" 
+                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                     AbsoluteLayout.LayoutBounds=".95,.95,60,60"/>
+    </AbsoluteLayout>
 </ContentPage>
