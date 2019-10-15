@@ -12,10 +12,12 @@
            VerticalOptions="CenterAndExpand" />
 
         </StackLayout>
-        <ImageButton Source="outline_add_24.xml"
+        <ImageButton Source="outline_add_white_48.png"
                      BackgroundColor="{StaticResource PrimaryColor}" 
-                     CornerRadius="30" 
+                     CornerRadius="30"
+                     Padding="10"
                      AbsoluteLayout.LayoutFlags="PositionProportional"
+                     Clicked="ImageButton_OnClicked"
                      AbsoluteLayout.LayoutBounds=".95,.95,60,60"/>
     </AbsoluteLayout>
 </ContentPage>

@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace MobileApp.Services
 {
-    interface INavigationService
+    public interface INavigationService
     {
         void Init(NavigationPage page);
 

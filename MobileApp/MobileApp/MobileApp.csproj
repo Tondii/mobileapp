@@ -17,4 +17,10 @@
     <Folder Include="PO\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\NewReceiptMethod.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
