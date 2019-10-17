@@ -9,7 +9,8 @@
         <StackLayout VerticalOptions="Center">
             <ImageButton 
                 Source="outline_photo_camera_white_48.png"
-                BackgroundColor="{StaticResource PrimaryColor}"/>
+                BackgroundColor="{StaticResource PrimaryColor}"
+                Clicked="ImageButton_OnClicked"/>
             <ImageButton
                 Source="outline_attach_file_white_48.png"
                 BackgroundColor="{StaticResource PrimaryColor}"/>

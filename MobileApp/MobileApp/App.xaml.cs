@@ -1,5 +1,6 @@
 ﻿using System;
 using MobileApp.Services;
+using MobileApp.ViewModels;
 using SimpleInjector;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -17,6 +18,8 @@ namespace MobileApp
 
             container.Register<INavigationService, NavigationService>(Lifestyle.Singleton);
             container.Register<IDataService>(() => new DataService(dbPath), Lifestyle.Transient);
+
+            container.Register<CameraResultViewModel>();
 
             Container = container;
 
