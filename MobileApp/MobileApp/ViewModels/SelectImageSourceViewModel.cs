@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
+using MobileApp.Exceptions;
 using MobileApp.Services;
 using MobileApp.Views;
-using Plugin.Permissions.Abstractions;
+using Plugin.Media.Abstractions;
 using Xamarin.Forms;
 
 namespace MobileApp.ViewModels
@@ -14,37 +12,33 @@ namespace MobileApp.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IDialogService _dialogService;
+        private readonly ICameraService _cameraService;
         public ICommand TakePhoto { get; }
 
-        public SelectImageSourceViewModel(INavigationService navigationService, IDialogService dialogService)
+        public SelectImageSourceViewModel(INavigationService navigationService, IDialogService dialogService, ICameraService cameraService)
         {
             _navigationService = navigationService;
             _dialogService = dialogService;
+            _cameraService = cameraService;
 
             TakePhoto = new Command(async () => await TakePhotoAsync());
         }
 
         private async Task TakePhotoAsync()
         {
-            var permission = await Plugin.Permissions.CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
-
-            if (permission != PermissionStatus.Granted)
+            MediaFile photo;
+            try
             {
-                var grantedPermission =
-                    await Plugin.Permissions.CrossPermissions.Current.RequestPermissionsAsync(Permission.Camera);
-                if (grantedPermission[Permission.Camera] != PermissionStatus.Granted)
+                photo = await _cameraService.TakePhotoAsync();
+                if (photo != null)
                 {
-                    await _dialogService.DisplayAlert("Access denied", permission.ToString(), "OK");
-                    return;
+                    var image = ImageSource.FromStream(() => photo.GetStream());
+                    await _navigationService.NavigateTo(new CameraResultPage(), image);
                 }
             }
-
-            var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(
-                new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
-            if (photo != null)
+            catch (PermissionDeniedException ex)
             {
-                var image = ImageSource.FromStream(() => photo.GetStream());
-                await _navigationService.NavigateTo(new CameraResultPage(), image);
+                await _dialogService.DisplayAlert("Permission denied", ex.ToString(), "OK");
             }
         }
     }

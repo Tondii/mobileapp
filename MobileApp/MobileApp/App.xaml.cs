@@ -19,6 +19,7 @@ namespace MobileApp
             container.Register<INavigationService, NavigationService>(Lifestyle.Singleton);
             container.Register<IDataService>(() => new DataService(dbPath), Lifestyle.Transient);
             container.Register<IDialogService, DialogService>();
+            container.Register<ICameraService, CameraService>();
 
             container.Register<MainViewModel>();
             container.Register<CameraResultViewModel>();
