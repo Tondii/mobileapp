@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MobileApp.Database.DTO;
 
 namespace MobileApp.Services
@@ -8,6 +9,7 @@ namespace MobileApp.Services
         IEnumerable<Receipt> GetAllReceipts();
         Receipt GetReceipt(int id);
         int AddReceipt(Receipt receipt);
+        Task<int> AddReceiptAsync(Receipt receipt);
         void DeleteReceipt(int id);
     }
 }

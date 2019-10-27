@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using MobileApp.Database;
 using MobileApp.Database.DTO;
 
@@ -28,6 +29,13 @@ namespace MobileApp.Services
         {
             _context.Receipts.Add(receipt);
             _context.SaveChanges();
+            return receipt.Id;
+        }
+
+        public async Task<int> AddReceiptAsync(Receipt receipt)
+        {
+            _context.Receipts.Add(receipt);
+            await _context.SaveChangesAsync();
             return receipt.Id;
         }
 

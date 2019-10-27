@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Input;
 using MobileApp.Database.DTO;
 using MobileApp.Navigation;
@@ -7,31 +8,34 @@ using Xamarin.Forms;
 
 namespace MobileApp.ViewModels
 {
-    class CameraResultViewModel : BaseViewModel, IParameterized<ImageSource>
+    class CameraResultViewModel : BaseViewModel, IParameterized<Stream>
     {
-        private ImageSource _image;
+        private Stream _imageStream;
         private readonly INavigationService _navigationService;
         private readonly IDataService _dataService;
+        private readonly IFileService _fileService;
+        public ImageSource Image => ImageSource.FromStream(() => _imageStream);
 
-        public CameraResultViewModel(INavigationService navigationService, IDataService dataService)
+        public CameraResultViewModel(INavigationService navigationService, IDataService dataService, IFileService fileService)
         {
             _navigationService = navigationService;
             _dataService = dataService;
+            _fileService = fileService;
         }
 
-        public ImageSource Image
+        public Stream ImageStream
         {
-            get => _image;
+            get => _imageStream;
             set
             {
-                _image = value;
+                _imageStream = value;
                 RaisePropertyChanged();
             }
         }
 
-        public void HandleParameter(ImageSource parameter)
+        public void HandleParameter(Stream parameter)
         {
-            Image = parameter;
+            ImageStream = parameter;
         }
 
         public ICommand AddNewReceipt =>
@@ -39,14 +43,14 @@ namespace MobileApp.ViewModels
             {
                 var receipt = new Receipt()
                 {
-                    BruttoSummary = 20,
+                    BruttoSummary = 0,
                     Company = new Company(),
                     CreateDateTime = DateTime.Now,
-                    PicturePath = string.Empty
+                    PicturePath = _fileService.GenerateImagePath()
                 };
-                _dataService.AddReceipt(receipt);
+                await _fileService.SaveFile(receipt.PicturePath, _imageStream);
+                await _dataService.AddReceiptAsync(receipt);
                 await _navigationService.NavigateTo(new MainPage());
-
             });
     }
 }

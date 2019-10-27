@@ -3,7 +3,7 @@ using Plugin.Media.Abstractions;
 
 namespace MobileApp.Services
 {
-    interface ICameraService
+    public interface ICameraService
     {
         Task<MediaFile> TakePhotoAsync();
     }
