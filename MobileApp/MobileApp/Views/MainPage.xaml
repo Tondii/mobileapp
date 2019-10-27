@@ -7,9 +7,41 @@
              x:Class="MobileApp.MainPage">
     <AbsoluteLayout>
         <StackLayout>
-            <Label Text="Praca inżynierska v0.1" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+            <ListView ItemsSource="{Binding Receipts}"
+                     BackgroundColor="#F5F7FB"
+                     SeparatorVisibility="None"
+                     x:Name="ReceiptsList"
+                     HasUnevenRows="true">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Margin="16,16,16,0"
+                                  Padding="10"
+                                  HasShadow="False"
+                                  BorderColor="Gray"
+                                  CornerRadius="5"
+                                  BackgroundColor="White">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="7*" />
+                                        <ColumnDefinition Width="3*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout
+                                       VerticalOptions="CenterAndExpand"
+                                       Orientation="Vertical">
+                                        <Label Text="{Binding Id}"
+                                              FontAttributes="Bold"
+                                              FontSize="Medium" />
+                                    </StackLayout>
+                                    <Frame Grid.Column="1">
+                                        <Label Text="Siema"></Label>
+                                    </Frame>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
         </StackLayout>
         <ImageButton Source="outline_add_white_48.png"
@@ -17,7 +49,7 @@
                      CornerRadius="30"
                      Padding="10"
                      AbsoluteLayout.LayoutFlags="PositionProportional"
-                     Clicked="ImageButton_OnClicked"
+                     Command="{Binding SelectImageSource}"
                      AbsoluteLayout.LayoutBounds=".95,.95,60,60"/>
     </AbsoluteLayout>
 </ContentPage>

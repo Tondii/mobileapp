@@ -4,13 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MobileApp.Views.NewReceiptMethod">
+             x:Class="MobileApp.Views.SelectImageSourcePage">
     <ContentPage.Content>
         <StackLayout VerticalOptions="Center">
             <ImageButton 
                 Source="outline_photo_camera_white_48.png"
                 BackgroundColor="{StaticResource PrimaryColor}"
-                Clicked="ImageButton_OnClicked"/>
+                Command="{Binding TakePhoto}"/>
             <ImageButton
                 Source="outline_attach_file_white_48.png"
                 BackgroundColor="{StaticResource PrimaryColor}"/>

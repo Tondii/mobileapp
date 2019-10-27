@@ -1,6 +1,13 @@
-﻿namespace MobileApp.Services
+﻿using System.Collections.Generic;
+using MobileApp.Database.DTO;
+
+namespace MobileApp.Services
 {
-    interface IDataService
+    public interface IDataService
     {
+        IEnumerable<Receipt> GetAllReceipts();
+        Receipt GetReceipt(int id);
+        int AddReceipt(Receipt receipt);
+        void DeleteReceipt(int id);
     }
 }

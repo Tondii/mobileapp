@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MobileApp.Services;
+using MobileApp.ViewModels;
 using MobileApp.Views;
 using Xamarin.Forms;
 
@@ -18,11 +15,7 @@ namespace MobileApp
         public MainPage()
         {
             InitializeComponent();
-        }
-
-        private void ImageButton_OnClicked(object sender, EventArgs e)
-        {
-            App.Container.GetInstance<INavigationService>().NavigateTo(new NewReceiptMethod());
+            BindingContext = App.Container.GetInstance<MainViewModel>();
         }
     }
 }
