@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using MobileApp.Exceptions;
 using MobileApp.Services;
@@ -28,7 +29,10 @@ namespace MobileApp.ViewModels
                 var photo = await _cameraService.TakePhotoAsync();
                 if (photo != null)
                 {
-                    await _navigationService.NavigateTo(new CameraResultPage(), photo.GetStream());
+                    await using var ms = new MemoryStream();
+                    photo.GetStream().CopyTo(ms);
+                    photo.Dispose();
+                    await _navigationService.NavigateTo(new CameraResultPage(), ms.ToArray());
                 }
             }
             catch (PermissionDeniedException ex)

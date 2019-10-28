@@ -10,10 +10,13 @@ namespace MobileApp.ViewModels
     public class MainViewModel : BaseViewModel
     {
         private readonly INavigationService _navigationService;
-        private IDataService _dataService;
-        public ObservableCollection<Receipt> Receipts { get; }
+        private readonly IDataService _dataService;
 
-        public ICommand SelectImageSource => new Command(async () => await _navigationService.NavigateTo(new SelectImageSourcePage()));
+        public ObservableCollection<Receipt> Receipts =>
+            new ObservableCollection<Receipt>(_dataService.GetAllReceipts());
+
+        public ICommand SelectImageSource =>
+            new Command(async () => await _navigationService.NavigateTo(new SelectImageSourcePage()));
 
         private Receipt _selectedReceipt;
         public Receipt SelectedReceipt
@@ -38,8 +41,6 @@ namespace MobileApp.ViewModels
         {
             _navigationService = navigationService;
             _dataService = dataService;
-
-            Receipts = new ObservableCollection<Receipt>(_dataService.GetAllReceipts());
         }
 
         private void ReceiptSelected(Receipt receipt)

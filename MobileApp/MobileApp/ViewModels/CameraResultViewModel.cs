@@ -8,13 +8,13 @@ using Xamarin.Forms;
 
 namespace MobileApp.ViewModels
 {
-    class CameraResultViewModel : BaseViewModel, IParameterized<Stream>
+    class CameraResultViewModel : BaseViewModel, IParameterized<byte[]>
     {
-        private Stream _imageStream;
+        private byte[] _imageBytes;
         private readonly INavigationService _navigationService;
         private readonly IDataService _dataService;
         private readonly IFileService _fileService;
-        public ImageSource Image => ImageSource.FromStream(() => _imageStream);
+        public ImageSource Image => ImageSource.FromStream(() => new MemoryStream(_imageBytes));
 
         public CameraResultViewModel(INavigationService navigationService, IDataService dataService, IFileService fileService)
         {
@@ -23,19 +23,19 @@ namespace MobileApp.ViewModels
             _fileService = fileService;
         }
 
-        public Stream ImageStream
+        public byte[] ImageBytes
         {
-            get => _imageStream;
+            get => _imageBytes;
             set
             {
-                _imageStream = value;
+                _imageBytes = value;
                 RaisePropertyChanged();
             }
         }
 
-        public void HandleParameter(Stream parameter)
+        public void HandleParameter(byte[] parameter)
         {
-            ImageStream = parameter;
+            ImageBytes = parameter;
         }
 
         public ICommand AddNewReceipt =>
@@ -48,7 +48,7 @@ namespace MobileApp.ViewModels
                     CreateDateTime = DateTime.Now,
                     PicturePath = _fileService.GenerateImagePath()
                 };
-                await _fileService.SaveFile(receipt.PicturePath, _imageStream);
+                await _fileService.SaveFile(receipt.PicturePath, _imageBytes);
                 await _dataService.AddReceiptAsync(receipt);
                 await _navigationService.NavigateTo(new MainPage());
             });

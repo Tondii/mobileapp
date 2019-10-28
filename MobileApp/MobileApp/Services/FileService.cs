@@ -6,17 +6,14 @@ namespace MobileApp.Services
 {
     class FileService : IFileService
     {
-        public async Task SaveFile(string path, Stream data)
+        public async Task SaveFile(string path, byte[] fileBytes)
         {
-            await using var ms = new MemoryStream();
-            data.CopyTo(ms);
-            await File.WriteAllBytesAsync(path, ms.ToArray());
+            await File.WriteAllBytesAsync(path, fileBytes);
         }
 
-        public async Task<Stream> OpenImage(string path)
+        public async Task<byte[]> OpenImage(string path)
         {
-            var dataBytes = await File.ReadAllBytesAsync(path);
-            return new MemoryStream(dataBytes);
+            return await File.ReadAllBytesAsync(path);
         }
 
         public string CombineFilePath(string filename)
