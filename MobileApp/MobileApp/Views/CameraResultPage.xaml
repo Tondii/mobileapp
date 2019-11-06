@@ -3,8 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:MobileApp.ViewModels;assembly=MobileApp"
              mc:Ignorable="d"
              x:Class="MobileApp.Views.CameraResultPage">
+    <ContentPage.BindingContext>
+        <vm:CameraResultViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
             <Image x:Name="ResultImage" Source="{Binding Image}"></Image>

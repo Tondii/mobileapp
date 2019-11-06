@@ -1,11 +1,7 @@
-﻿using System;
-using System.ComponentModel;
-using MobileApp.Services;
-using MobileApp.ViewModels;
-using MobileApp.Views;
+﻿using System.ComponentModel;
 using Xamarin.Forms;
 
-namespace MobileApp
+namespace MobileApp.Views
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
@@ -15,7 +11,6 @@ namespace MobileApp
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = App.Container.GetInstance<MainViewModel>();
         }
     }
 }

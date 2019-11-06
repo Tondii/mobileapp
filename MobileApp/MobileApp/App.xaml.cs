@@ -1,6 +1,7 @@
 ﻿using System;
 using MobileApp.Services;
 using MobileApp.ViewModels;
+using MobileApp.Views;
 using SimpleInjector;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,10 +22,6 @@ namespace MobileApp
             container.Register<IDialogService, DialogService>();
             container.Register<ICameraService, CameraService>();
             container.Register<IFileService, FileService>();
-
-            container.Register<MainViewModel>();
-            container.Register<CameraResultViewModel>();
-            container.Register<SelectImageSourceViewModel>();
 
             Container = container;
 

@@ -4,6 +4,7 @@ using System.Windows.Input;
 using MobileApp.Database.DTO;
 using MobileApp.Navigation;
 using MobileApp.Services;
+using MobileApp.Views;
 using Xamarin.Forms;
 
 namespace MobileApp.ViewModels
@@ -16,11 +17,11 @@ namespace MobileApp.ViewModels
         private readonly IFileService _fileService;
         public ImageSource Image => ImageSource.FromStream(() => new MemoryStream(_imageBytes));
 
-        public CameraResultViewModel(INavigationService navigationService, IDataService dataService, IFileService fileService)
+        public CameraResultViewModel()
         {
-            _navigationService = navigationService;
-            _dataService = dataService;
-            _fileService = fileService;
+            _navigationService = App.Container.GetInstance<INavigationService>();
+            _dataService = App.Container.GetInstance<IDataService>();
+            _fileService = App.Container.GetInstance<IFileService>();
         }
 
         public byte[] ImageBytes

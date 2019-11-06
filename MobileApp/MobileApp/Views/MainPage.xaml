@@ -4,8 +4,12 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:MobileApp.Converters;assembly=MobileApp"
+             xmlns:vm="clr-namespace:MobileApp.ViewModels;assembly=MobileApp"
              mc:Ignorable="d"
-             x:Class="MobileApp.MainPage">
+             x:Class="MobileApp.Views.MainPage">
+    <ContentPage.BindingContext>
+        <vm:MainViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:FilePathToImageConverter x:Key="filePathConverter" />

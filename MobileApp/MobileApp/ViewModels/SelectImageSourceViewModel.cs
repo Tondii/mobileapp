@@ -15,11 +15,11 @@ namespace MobileApp.ViewModels
         private readonly ICameraService _cameraService;
         public ICommand TakePhoto => new Command(async () => await TakePhotoAsync());
 
-        public SelectImageSourceViewModel(INavigationService navigationService, IDialogService dialogService, ICameraService cameraService)
+        public SelectImageSourceViewModel()
         {
-            _navigationService = navigationService;
-            _dialogService = dialogService;
-            _cameraService = cameraService;
+            _navigationService = App.Container.GetInstance<INavigationService>();
+            _dialogService = App.Container.GetInstance<IDialogService>();
+            _cameraService = App.Container.GetInstance<ICameraService>();
         }
 
         private async Task TakePhotoAsync()

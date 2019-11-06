@@ -37,10 +37,10 @@ namespace MobileApp.ViewModels
             }
         }
 
-        public MainViewModel(INavigationService navigationService, IDataService dataService)
+        public MainViewModel()
         {
-            _navigationService = navigationService;
-            _dataService = dataService;
+            _navigationService = App.Container.GetInstance<INavigationService>();
+            _dataService = App.Container.GetInstance<IDataService>();
         }
 
         private void ReceiptSelected(Receipt receipt)
