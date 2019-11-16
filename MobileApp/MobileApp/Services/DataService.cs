@@ -48,5 +48,27 @@ namespace MobileApp.Services
             _context.Receipts.Remove(receipt);
             _context.SaveChanges();
         }
+
+        public async Task DeleteReceiptAsync(int id)
+        {
+            var receipt = GetReceipt(id);
+
+            if (receipt == null) return;
+
+            _context.Receipts.Remove(receipt);
+            await _context.SaveChangesAsync();
+        }
+
+        public void UpdateReceipt(Receipt receipt)
+        {
+            _context.Receipts.Update(receipt);
+            _context.SaveChanges();
+        }
+
+        public async Task UpdateReceiptAsync(Receipt receipt)
+        {
+            _context.Receipts.Update(receipt);
+            await _context.SaveChangesAsync();
+        }
     }
 }

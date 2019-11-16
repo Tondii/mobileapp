@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:MobileApp.Converters;assembly=MobileApp"
+             xmlns:vm="clr-namespace:MobileApp.ViewModels;assembly=MobileApp"
+             mc:Ignorable="d"
+             x:Class="MobileApp.Views.ReceiptPage">
+    <ContentPage.BindingContext>
+        <vm:ReceiptViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FilePathToImageConverter x:Key="FilePathConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackLayout BackgroundColor="Orange">
+                <Label Text="Tu będzie data"></Label>
+                <Button Text="Pobierz Jsona"
+                        Command="{Binding GetRecognizedElements}"></Button>
+            </StackLayout>
+            <StackLayout Grid.Row="1"
+                         BackgroundColor="CornflowerBlue">
+                <Image Source="{Binding Receipt.PicturePath, Converter={StaticResource FilePathConverter}}"></Image>
+            </StackLayout>
+            <StackLayout Grid.Row="2">
+                <Label Text="{Binding Receipt.GoogleResponse}"></Label>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

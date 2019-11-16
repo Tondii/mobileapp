@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace MobileApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ReceiptDetailsPage : ContentPage
+    public partial class ReceiptPage : ContentPage
     {
-        public ReceiptDetailsPage()
+        public ReceiptPage()
         {
             InitializeComponent();
         }

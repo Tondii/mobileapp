@@ -11,5 +11,8 @@ namespace MobileApp.Services
         int AddReceipt(Receipt receipt);
         Task<int> AddReceiptAsync(Receipt receipt);
         void DeleteReceipt(int id);
+        Task DeleteReceiptAsync(int id);
+        void UpdateReceipt(Receipt receipt);
+        Task UpdateReceiptAsync(Receipt receipt);
     }
 }

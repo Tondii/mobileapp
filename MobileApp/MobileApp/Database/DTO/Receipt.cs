@@ -11,5 +11,6 @@ namespace MobileApp.Database.DTO
         public string PicturePath { get; set; }
         public Company Company { get; set; }
         public double BruttoSummary { get; set; }
+        public string GoogleResponse { get; set; }
     }
 }

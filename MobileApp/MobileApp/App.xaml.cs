@@ -1,10 +1,7 @@
-﻿using System;
-using MobileApp.Services;
-using MobileApp.ViewModels;
+﻿using MobileApp.Services;
 using MobileApp.Views;
 using SimpleInjector;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace MobileApp
 {

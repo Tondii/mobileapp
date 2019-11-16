@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
     <PackageReference Include="SimpleInjector" Version="4.7.1" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
@@ -19,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\ReceiptPage.xaml.cs">
+      <DependentUpon>ReceiptPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SelectImageSourcePage.xaml.cs">
       <DependentUpon>SelectImageSourcePage.xaml</DependentUpon>
     </Compile>
@@ -31,7 +36,7 @@
     <EmbeddedResource Update="Views\SelectImageSourcePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ReceiptDetailsPage.xaml">
+    <EmbeddedResource Update="Views\ReceiptPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -45,7 +45,7 @@ namespace MobileApp.ViewModels
 
         private void ReceiptSelected(Receipt receipt)
         {
-            _navigationService.NavigateTo(new ReceiptDetailsPage(), receipt);
+            _navigationService.NavigateTo(new ReceiptPage(), receipt);
         }
     }
 }

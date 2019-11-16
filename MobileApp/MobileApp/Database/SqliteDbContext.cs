@@ -7,7 +7,7 @@ namespace MobileApp.Database
     public sealed class SqliteDbContext : DbContext
     {
         private readonly string _dbPath;
-        public SqliteDbContext(string dbPath) : base()
+        public SqliteDbContext(string dbPath)
         {
             _dbPath = dbPath;
             Database.EnsureCreated();

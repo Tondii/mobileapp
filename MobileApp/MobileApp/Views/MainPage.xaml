@@ -8,50 +8,49 @@
              mc:Ignorable="d"
              x:Class="MobileApp.Views.MainPage">
     <ContentPage.BindingContext>
-        <vm:MainViewModel/>
+        <vm:MainViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:FilePathToImageConverter x:Key="filePathConverter" />
+            <converters:FilePathToImageConverter x:Key="FilePathConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <AbsoluteLayout>
         <StackLayout>
             <ListView ItemsSource="{Binding Receipts}"
-                     BackgroundColor="#F5F7FB"
-                     SeparatorVisibility="None"
-                     x:Name="ReceiptsList"
-                     HasUnevenRows="true">
+                      BackgroundColor="#F5F7FB"
+                      SeparatorVisibility="None"
+                      x:Name="ReceiptsList"
+                      SelectedItem="{Binding SelectedReceipt, Mode=TwoWay}"
+                      HasUnevenRows="true">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Frame Margin="16,16,16,0"
-                                  Padding="10"
-                                  HasShadow="False"
-                                  BorderColor="Gray"
-                                  CornerRadius="5"
-                                  BackgroundColor="White">
+                                   Padding="10"
+                                   HasShadow="False"
+                                   BorderColor="Gray"
+                                   CornerRadius="5"
+                                   BackgroundColor="White">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="7*" />
                                         <ColumnDefinition Width="3*" />
                                     </Grid.ColumnDefinitions>
-                                    <StackLayout
-                                       VerticalOptions="CenterAndExpand"
-                                       Orientation="Vertical">
+                                    <StackLayout VerticalOptions="CenterAndExpand"
+                                                 Orientation="Vertical">
                                         <Label Text="{Binding Id}"
-                                              FontAttributes="Bold"
-                                              FontSize="Medium" />
+                                               FontAttributes="Bold"
+                                               FontSize="Medium" />
                                     </StackLayout>
                                     <Frame Grid.Column="1"
                                            CornerRadius="5"
                                            IsClippedToBounds="True"
                                            Padding="0">
-                                        <Image
-                                            Aspect="AspectFill"
-                                            HeightRequest="80"
-                                            WidthRequest="80"
-                                            Source="{Binding PicturePath, Converter={StaticResource filePathConverter}}" />
+                                        <Image Aspect="AspectFill"
+                                               HeightRequest="80"
+                                               WidthRequest="80"
+                                               Source="{Binding PicturePath, Converter={StaticResource FilePathConverter}}" />
                                     </Frame>
                                 </Grid>
                             </Frame>
@@ -62,11 +61,11 @@
 
         </StackLayout>
         <ImageButton Source="outline_add_white_48.png"
-                     BackgroundColor="{StaticResource PrimaryColor}" 
+                     BackgroundColor="{StaticResource PrimaryColor}"
                      CornerRadius="30"
                      Padding="10"
                      AbsoluteLayout.LayoutFlags="PositionProportional"
                      Command="{Binding SelectImageSource}"
-                     AbsoluteLayout.LayoutBounds=".95,.95,60,60"/>
+                     AbsoluteLayout.LayoutBounds=".95,.95,60,60" />
     </AbsoluteLayout>
 </ContentPage>
