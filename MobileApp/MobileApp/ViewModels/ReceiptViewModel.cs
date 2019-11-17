@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using MobileApp.Database.DTO;
 using MobileApp.DocumentRecognition;
@@ -12,7 +13,19 @@ namespace MobileApp.ViewModels
     {
         private readonly IDataService _dataService;
         private readonly IFileService _fileService;
-        public Receipt Receipt { get; private set; }
+
+        private Receipt _receipt;
+        public Receipt Receipt
+        {
+            get => _receipt;
+            private set
+            {
+                _receipt = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public ICommand GetRecognizedElements => new Command(async () => await RecognizeElements());
 
         public ReceiptViewModel()
         {
@@ -25,7 +38,7 @@ namespace MobileApp.ViewModels
             Receipt = parameter;
         }
 
-        public ICommand GetRecognizedElements => new Command(async () =>
+        private async Task RecognizeElements()
         {
             var bytes = await _fileService.OpenImage(Receipt.PicturePath);
             var base64 = Convert.ToBase64String(bytes);
@@ -33,6 +46,6 @@ namespace MobileApp.ViewModels
             var googleResponse = await recognizer.GetRecognizedText(base64);
             Receipt.GoogleResponse = googleResponse;
             await _dataService.UpdateReceiptAsync(Receipt);
-        });
+        }
     }
 }

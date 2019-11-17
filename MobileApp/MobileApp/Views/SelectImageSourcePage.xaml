@@ -7,17 +7,16 @@
              mc:Ignorable="d"
              x:Class="MobileApp.Views.SelectImageSourcePage">
     <ContentPage.BindingContext>
-        <vm:SelectImageSourceViewModel/>
+        <vm:SelectImageSourceViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout VerticalOptions="Center">
-            <ImageButton 
-                Source="outline_photo_camera_white_48.png"
-                BackgroundColor="{StaticResource PrimaryColor}"
-                Command="{Binding TakePhoto}"/>
-            <ImageButton
-                Source="outline_attach_file_white_48.png"
-                BackgroundColor="{StaticResource PrimaryColor}"/>
+            <ImageButton Source="outline_photo_camera_white_48.png"
+                         BackgroundColor="{StaticResource PrimaryColor}"
+                         Command="{Binding TakePhoto}" />
+            <ImageButton Source="outline_attach_file_white_48.png"
+                         BackgroundColor="{StaticResource PrimaryColor}"
+                         Command="{Binding PickImage}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

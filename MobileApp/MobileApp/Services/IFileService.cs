@@ -1,5 +1,5 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Plugin.Media.Abstractions;
 
 namespace MobileApp.Services
 {
@@ -10,5 +10,6 @@ namespace MobileApp.Services
         string CombineFilePath(string filename);
         string GenerateImageFilename();
         string GenerateImagePath();
+        Task<MediaFile> PickImageFromGallery();
     }
 }

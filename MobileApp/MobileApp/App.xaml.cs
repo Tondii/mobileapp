@@ -14,11 +14,13 @@ namespace MobileApp
 
             var container = new Container();
 
+            container.Register<IPermissionService, PermissionService>();
             container.Register<INavigationService, NavigationService>(Lifestyle.Singleton);
-            container.Register<IDataService>(() => new DataService(dbPath), Lifestyle.Transient);
+            container.Register<IDataService>(() => new DataService(dbPath));
             container.Register<IDialogService, DialogService>();
             container.Register<ICameraService, CameraService>();
             container.Register<IFileService, FileService>();
+
 
             Container = container;
 

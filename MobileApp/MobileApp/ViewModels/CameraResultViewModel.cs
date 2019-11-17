@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using MobileApp.Database.DTO;
 using MobileApp.Navigation;
@@ -16,6 +17,8 @@ namespace MobileApp.ViewModels
         private readonly IDataService _dataService;
         private readonly IFileService _fileService;
         public ImageSource Image => ImageSource.FromStream(() => new MemoryStream(_imageBytes));
+
+        public ICommand AddNewReceipt => new Command(async () => await AddNewReceiptAsync());
 
         public CameraResultViewModel()
         {
@@ -39,19 +42,18 @@ namespace MobileApp.ViewModels
             ImageBytes = parameter;
         }
 
-        public ICommand AddNewReceipt =>
-            new Command(async () =>
+        private async Task AddNewReceiptAsync()
+        {
+            var receipt = new Receipt()
             {
-                var receipt = new Receipt()
-                {
-                    BruttoSummary = 0,
-                    Company = new Company(),
-                    CreateDateTime = DateTime.Now,
-                    PicturePath = _fileService.GenerateImagePath()
-                };
-                await _fileService.SaveFile(receipt.PicturePath, _imageBytes);
-                await _dataService.AddReceiptAsync(receipt);
-                await _navigationService.NavigateTo(new MainPage());
-            });
+                BruttoSummary = 0,
+                Company = new Company(),
+                CreateDateTime = DateTime.Now,
+                PicturePath = _fileService.GenerateImagePath()
+            };
+            await _fileService.SaveFile(receipt.PicturePath, _imageBytes);
+            await _dataService.AddReceiptAsync(receipt);
+            await _navigationService.NavigateTo(new MainPage());
+        }
     }
 }

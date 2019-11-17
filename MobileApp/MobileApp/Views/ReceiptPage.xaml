@@ -23,7 +23,7 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <StackLayout BackgroundColor="Orange">
-                <Label Text="Tu będzie data"></Label>
+                <Label Text="{Binding Receipt.Id}"></Label>
                 <Button Text="Pobierz Jsona"
                         Command="{Binding GetRecognizedElements}"></Button>
             </StackLayout>
