@@ -48,7 +48,13 @@ namespace MobileApp.Model.Google
 
     internal class Feature
     {
-        private const string Type = "DOCUMENT_TEXT_DETECTION";
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
+        public Feature(string type = "DOCUMENT_TEXT_DETECTION")
+        {
+            Type = type;
+        }
     }
 
     internal class ImageContext

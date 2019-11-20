@@ -7,7 +7,7 @@ namespace MobileApp.Services
 {
     class RequestService : IRequestService
     {
-        private readonly string _apiKey = "AIzaSyCbGoxAzRRlfokl0VS0bNCzkuNr3DD7qJA";
+        private readonly string _apiKey = "AIzaSyAuMegsulFeaPi86zxWDBd1qO90U0UsoB8";
         private string _googleUri = "https://vision.googleapis.com/v1/images:annotate";
 
         public async Task<string> GetRecognizedWords(string base64)
