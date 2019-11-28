@@ -1,4 +1,6 @@
-﻿using MobileApp.Services;
+﻿using Microsoft.EntityFrameworkCore;
+using MobileApp.Database;
+using MobileApp.Services;
 using MobileApp.Views;
 using SimpleInjector;
 using Xamarin.Forms;
@@ -8,16 +10,22 @@ namespace MobileApp
     public partial class App : Application
     {
         public static Container Container { get; set; }
+        public static string DbPath { get; private set; }
+
         public App(string dbPath)
         {
             InitializeComponent();
+            DbPath = dbPath;
+            using var context = SqliteContextFactory.CreateDbContext();
+            context.Database.Migrate();
+
 
             var container = new Container();
 
             container.Register<IRequestService, RequestService>();
             container.Register<IPermissionService, PermissionService>();
             container.Register<INavigationService, NavigationService>(Lifestyle.Singleton);
-            container.Register<IDataService>(() => new DataService(dbPath));
+            container.Register<IDataService, DataService>();
             container.Register<IDialogService, DialogService>();
             container.Register<ICameraService, CameraService>();
             container.Register<IFileService, FileService>();
@@ -34,7 +42,7 @@ namespace MobileApp
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+
         }
 
         protected override void OnSleep()

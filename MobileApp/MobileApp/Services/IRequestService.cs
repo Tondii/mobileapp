@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
+using MobileApp.Model.Google.Response;
 
 namespace MobileApp.Services
 {
-    public interface IRequestService
+    internal interface IRequestService
     {
-        Task<string> GetRecognizedWords(string base64);
+        Task<ResponseObject> GetRecognizedWords(string base64);
     }
 }

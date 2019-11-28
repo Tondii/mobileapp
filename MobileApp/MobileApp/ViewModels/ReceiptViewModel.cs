@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using MobileApp.Database.DTO;
 using MobileApp.Navigation;
+using MobileApp.Recognition;
 using MobileApp.Services;
+using MobileApp.Views;
 using Xamarin.Forms;
 
 namespace MobileApp.ViewModels
@@ -14,10 +16,12 @@ namespace MobileApp.ViewModels
         private readonly IFileService _fileService;
         private readonly IReceiptService _receiptService;
         private readonly IRequestService _requestService;
-
-        private bool _changed;
+        private readonly IDialogService _dialogService;
+        private readonly INavigationService _navigationService;
 
         private Receipt _receipt;
+
+
         public Receipt Receipt
         {
             get => _receipt;
@@ -29,6 +33,7 @@ namespace MobileApp.ViewModels
         }
 
         public ICommand GetRecognizedElements => new Command(async () => await RecognizeElements());
+        public ICommand RemoveReceipt => new Command(async () => await RemoveThisReceipt());
 
         public ReceiptViewModel()
         {
@@ -36,6 +41,8 @@ namespace MobileApp.ViewModels
             _fileService = App.Container.GetInstance<IFileService>();
             _receiptService = App.Container.GetInstance<IReceiptService>();
             _requestService = App.Container.GetInstance<IRequestService>();
+            _dialogService = App.Container.GetInstance<IDialogService>();
+            _navigationService = App.Container.GetInstance<INavigationService>();
         }
 
         public void HandleParameter(Receipt parameter)
@@ -45,12 +52,25 @@ namespace MobileApp.ViewModels
 
         private async Task RecognizeElements()
         {
-            var bytes = await _fileService.OpenImage(Receipt.PicturePath);
+            var bytes = await _fileService.OpenFile(Receipt.PicturePath);
             var base64 = Convert.ToBase64String(bytes);
             var googleResponse = await _requestService.GetRecognizedWords(base64);
-            Receipt.GoogleResponse = googleResponse;
+            var words = WordProcessor.ConvertGoogleResponse(googleResponse);
             RaisePropertyChanged(nameof(Receipt));
             await _dataService.UpdateReceiptAsync(Receipt);
+        }
+
+        private async Task RemoveThisReceipt()
+        {
+            if (!await _dialogService.DisplayAgreementAlert("Delete", "Czy na pewno chcesz usunąć ten paragon?", "Tak",
+                "Nie"))
+            {
+                return;
+            }
+
+            await _fileService.DeleteFile(Receipt.PicturePath);
+            await _dataService.DeleteReceiptAsync(Receipt.Id);
+            await _navigationService.NavigateWithoutReturnTo(new MainPage());
         }
     }
 }

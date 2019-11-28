@@ -5788,13 +5788,13 @@ namespace MobileApp.Droid
 			public const int notify_panel_notification_icon_bg = 2131165299;
 			
 			// aapt resource value: 0x7F070074
-			public const int outline_add_24 = 2131165300;
+			public const int outline_add_white_48 = 2131165300;
 			
 			// aapt resource value: 0x7F070075
-			public const int outline_add_white_48 = 2131165301;
+			public const int outline_attach_file_white_48 = 2131165301;
 			
 			// aapt resource value: 0x7F070076
-			public const int outline_attach_file_white_48 = 2131165302;
+			public const int outline_delete_white_48 = 2131165302;
 			
 			// aapt resource value: 0x7F070077
 			public const int outline_photo_camera_white_48 = 2131165303;

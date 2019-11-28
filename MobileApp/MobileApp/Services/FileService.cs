@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.Permissions.Abstractions;
+using SkiaSharp;
 
 namespace MobileApp.Services
 {
@@ -21,9 +22,14 @@ namespace MobileApp.Services
             await File.WriteAllBytesAsync(path, fileBytes);
         }
 
-        public async Task<byte[]> OpenImage(string path)
+        public async Task<byte[]> OpenFile(string path)
         {
             return await File.ReadAllBytesAsync(path);
+        }
+
+        public async Task DeleteFile(string path)
+        {
+            await Task.Run(() => { File.Delete(path); });
         }
 
         public string CombineFilePath(string filename)
@@ -48,10 +54,19 @@ namespace MobileApp.Services
 
             if (!CrossMedia.Current.IsPickPhotoSupported)
             {
-
+                throw new NotSupportedException("Picking photo is not supported.");
             }
 
             return await CrossMedia.Current.PickPhotoAsync();
+        }
+
+        public async Task SaveImage(string path, byte[] imageBytes, int compression = 100)
+        {
+            using var ms = new SKMemoryStream(imageBytes);
+            using var original = SKBitmap.Decode(ms);
+            using var image = SKImage.FromBitmap(original);
+            await using var output = File.OpenWrite(path);
+            image.Encode(SKEncodedImageFormat.Jpeg, compression).SaveTo(output);
         }
     }
 }

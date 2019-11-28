@@ -15,26 +15,33 @@
             <converters:FilePathToImageConverter x:Key="FilePathConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="outline_delete_white_48.png"
+                     Text="Delete"
+                     Command="{Binding RemoveReceipt}" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <StackLayout BackgroundColor="Orange">
-                <Label Text="{Binding Receipt.Id}"></Label>
-                <Button Text="Pobierz Jsona"
-                        Command="{Binding GetRecognizedElements}"></Button>
-            </StackLayout>
-            <StackLayout Grid.Row="1">
-                <Label Text="{Binding Receipt.GoogleResponse}"
-                       x:Name="myLabel"></Label>
-            </StackLayout>
-            <StackLayout Grid.Row="2"
-                         BackgroundColor="CornflowerBlue">
-                <Image Source="{Binding Receipt.PicturePath, Converter={StaticResource FilePathConverter}}"></Image>
-            </StackLayout>
-        </Grid>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackLayout BackgroundColor="Orange">
+                    <Label Text="{Binding Receipt.Id}"></Label>
+                    <Button Text="Pobierz Jsona"
+                            Command="{Binding GetRecognizedElements}"></Button>
+                </StackLayout>
+                <StackLayout Grid.Row="1">
+                    <Label Text="{Binding Receipt.GoogleResponse}"
+                           x:Name="myLabel"></Label>
+                </StackLayout>
+                <StackLayout Grid.Row="2"
+                             BackgroundColor="CornflowerBlue">
+                    <Image Source="{Binding Receipt.PicturePath, Converter={StaticResource FilePathConverter}}"></Image>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

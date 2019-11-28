@@ -10,9 +10,9 @@ namespace MobileApp.Services
     {
         private readonly SqliteDbContext _context;
 
-        public DataService(string dbPath)
+        public DataService()
         {
-            _context = new SqliteDbContext(dbPath);
+            _context = SqliteContextFactory.CreateDbContext();
         }
 
         public IEnumerable<Receipt> GetAllReceipts()

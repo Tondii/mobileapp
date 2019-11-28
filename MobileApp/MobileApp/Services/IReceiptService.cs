@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace MobileApp.Services
+﻿namespace MobileApp.Services
 {
     interface IReceiptService
     {

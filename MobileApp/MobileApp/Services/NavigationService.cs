@@ -13,6 +13,12 @@ namespace MobileApp.Services
             _rootPage = page;
         }
 
+        public async Task NavigateWithoutReturnTo(Page page)
+        {
+            NavigationPage.SetHasBackButton(page, false);
+            await _rootPage.PushAsync(page);
+        }
+
         public async Task NavigateTo(Page page)
         {
             await _rootPage.PushAsync(page);
