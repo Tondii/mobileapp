@@ -22,7 +22,7 @@
                       SeparatorVisibility="None"
                       x:Name="ReceiptsList"
                       SelectedItem="{Binding SelectedReceipt, Mode=TwoWay}"
-                      HasUnevenRows="true">
+                      HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

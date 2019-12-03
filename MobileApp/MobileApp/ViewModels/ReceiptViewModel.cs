@@ -35,6 +35,8 @@ namespace MobileApp.ViewModels
         public ICommand GetRecognizedElements => new Command(async () => await RecognizeElements());
         public ICommand RemoveReceipt => new Command(async () => await RemoveThisReceipt());
 
+        public ICommand EditComment => new Command(async () => await EditCommentAsync());
+
         public ReceiptViewModel()
         {
             _dataService = App.Container.GetInstance<IDataService>();
@@ -71,6 +73,15 @@ namespace MobileApp.ViewModels
             await _fileService.DeleteFile(Receipt.PicturePath);
             await _dataService.DeleteReceiptAsync(Receipt.Id);
             await _navigationService.NavigateWithoutReturnTo(new MainPage());
+        }
+
+        private async Task EditCommentAsync()
+        {
+            await _navigationService.NavigateTo(new EditCommentPage(), Receipt);
+            MessagingCenter.Subscribe<EditCommentViewModel>(this, "editedComment", model =>
+            {
+                Receipt = _dataService.GetReceipt(model.Receipt.Id);
+            });
         }
     }
 }

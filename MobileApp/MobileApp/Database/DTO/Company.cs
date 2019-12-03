@@ -5,7 +5,7 @@ namespace MobileApp.Database.DTO
     public class Company
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string VatIdentificationNumber { get; set; }
         public string Name { get; set; }
         public string Street { get; set; }

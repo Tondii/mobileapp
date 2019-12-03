@@ -8,6 +8,7 @@ namespace MobileApp.Services
         void Init(NavigationPage page);
         Task NavigateWithoutReturnTo(Page page);
         Task NavigateTo(Page page);
+        Task BackToPreviousPage();
         Task NavigateTo<TParameter>(Page page, TParameter parameter);
     }
 }

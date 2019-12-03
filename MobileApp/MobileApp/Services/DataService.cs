@@ -20,26 +20,26 @@ namespace MobileApp.Services
             return _context.Receipts.ToList();
         }
 
-        public Receipt GetReceipt(int id)
+        public Receipt GetReceipt(long id)
         {
             return _context.Receipts.FirstOrDefault(r => r.Id == id);
         }
 
-        public int AddReceipt(Receipt receipt)
+        public long AddReceipt(Receipt receipt)
         {
             _context.Receipts.Add(receipt);
             _context.SaveChanges();
             return receipt.Id;
         }
 
-        public async Task<int> AddReceiptAsync(Receipt receipt)
+        public async Task<long> AddReceiptAsync(Receipt receipt)
         {
             _context.Receipts.Add(receipt);
             await _context.SaveChangesAsync();
             return receipt.Id;
         }
 
-        public void DeleteReceipt(int id)
+        public void DeleteReceipt(long id)
         {
             var receipt = GetReceipt(id);
 
@@ -49,7 +49,7 @@ namespace MobileApp.Services
             _context.SaveChanges();
         }
 
-        public async Task DeleteReceiptAsync(int id)
+        public async Task DeleteReceiptAsync(long id)
         {
             var receipt = GetReceipt(id);
 

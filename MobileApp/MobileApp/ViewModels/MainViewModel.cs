@@ -33,7 +33,7 @@ namespace MobileApp.ViewModels
                 }
 
                 ReceiptSelected(_selectedReceipt);
-                _selectedReceipt = null;
+                SelectedReceipt = null;
             }
         }
 

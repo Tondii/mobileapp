@@ -7,11 +7,11 @@ namespace MobileApp.Services
     public interface IDataService
     {
         IEnumerable<Receipt> GetAllReceipts();
-        Receipt GetReceipt(int id);
-        int AddReceipt(Receipt receipt);
-        Task<int> AddReceiptAsync(Receipt receipt);
-        void DeleteReceipt(int id);
-        Task DeleteReceiptAsync(int id);
+        Receipt GetReceipt(long id);
+        long AddReceipt(Receipt receipt);
+        Task<long> AddReceiptAsync(Receipt receipt);
+        void DeleteReceipt(long id);
+        Task DeleteReceiptAsync(long id);
         void UpdateReceipt(Receipt receipt);
         Task UpdateReceiptAsync(Receipt receipt);
     }

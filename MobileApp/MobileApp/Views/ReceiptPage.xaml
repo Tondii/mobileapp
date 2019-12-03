@@ -16,6 +16,9 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="outline_edit_white_48.png"
+                     Text="EditComment"
+                     Command="{Binding EditComment}" />
         <ToolbarItem IconImageSource="outline_delete_white_48.png"
                      Text="Delete"
                      Command="{Binding RemoveReceipt}" />
@@ -29,13 +32,11 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackLayout BackgroundColor="Orange">
-                    <Label Text="{Binding Receipt.Id}"></Label>
-                    <Button Text="Pobierz Jsona"
-                            Command="{Binding GetRecognizedElements}"></Button>
+                    <Label Text="{Binding Receipt.Id}" />
+                    <Label Text="{Binding Receipt.Comment}" />
                 </StackLayout>
                 <StackLayout Grid.Row="1">
-                    <Label Text="{Binding Receipt.GoogleResponse}"
-                           x:Name="myLabel"></Label>
+                    <Label Text="{Binding Receipt.GoogleResponse}" />
                 </StackLayout>
                 <StackLayout Grid.Row="2"
                              BackgroundColor="CornflowerBlue">

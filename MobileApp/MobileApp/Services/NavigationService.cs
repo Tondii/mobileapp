@@ -24,6 +24,11 @@ namespace MobileApp.Services
             await _rootPage.PushAsync(page);
         }
 
+        public async Task BackToPreviousPage()
+        {
+            await _rootPage.PopAsync();
+        }
+
         public async Task NavigateTo<TParameter>(Page page, TParameter parameter)
         {
             if (page.BindingContext != null && page.BindingContext is IParameterized<TParameter> p)

@@ -1,16 +1,21 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace MobileApp.Database.DTO
 {
     public class Receipt
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
         public DateTime CreateDateTime { get; set; }
         public string PicturePath { get; set; }
         public Company Company { get; set; }
         public double BruttoSummary { get; set; }
+
+        [Column(TypeName = "varchar(255)")]
+        public string Comment { get; set; }
         public string GoogleResponse { get; set; }
     }
 }

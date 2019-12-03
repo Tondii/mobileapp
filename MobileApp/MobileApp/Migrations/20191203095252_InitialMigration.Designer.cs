@@ -9,8 +9,8 @@ using MobileApp.Database;
 namespace MobileApp.Migrations
 {
     [DbContext(typeof(SqliteDbContext))]
-    [Migration("20191122112602_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20191203095252_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,7 +20,7 @@ namespace MobileApp.Migrations
 
             modelBuilder.Entity("MobileApp.Database.DTO.Company", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("BuildingNumber");
@@ -42,12 +42,15 @@ namespace MobileApp.Migrations
 
             modelBuilder.Entity("MobileApp.Database.DTO.Receipt", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<double>("BruttoSummary");
 
-                    b.Property<int?>("CompanyId");
+                    b.Property<string>("Comment")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<long?>("CompanyId");
 
                     b.Property<DateTime>("CreateDateTime");
 

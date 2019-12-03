@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MobileApp.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,7 @@ namespace MobileApp.Migrations
                 name: "Companies",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<long>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     VatIdentificationNumber = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
@@ -29,12 +29,13 @@ namespace MobileApp.Migrations
                 name: "Receipts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<long>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDateTime = table.Column<DateTime>(nullable: false),
                     PicturePath = table.Column<string>(nullable: true),
-                    CompanyId = table.Column<int>(nullable: true),
+                    CompanyId = table.Column<long>(nullable: true),
                     BruttoSummary = table.Column<double>(nullable: false),
+                    Comment = table.Column<string>(type: "varchar(255)", nullable: true),
                     GoogleResponse = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
