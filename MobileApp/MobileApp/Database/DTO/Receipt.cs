@@ -12,7 +12,7 @@ namespace MobileApp.Database.DTO
         public DateTime CreateDateTime { get; set; }
         public string PicturePath { get; set; }
         public Company Company { get; set; }
-        public double BruttoSummary { get; set; }
+        public float BruttoSummary { get; set; }
 
         [Column(TypeName = "varchar(255)")]
         public string Comment { get; set; }

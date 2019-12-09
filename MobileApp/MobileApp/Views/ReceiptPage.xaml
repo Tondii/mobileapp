@@ -27,20 +27,39 @@
         <ScrollView>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <StackLayout BackgroundColor="Orange">
                     <Label Text="{Binding Receipt.Id}" />
                     <Label Text="{Binding Receipt.Comment}" />
+                    <Label Text="Brutto: " />
+                    <Label Text="{Binding Receipt.BruttoSummary}" />
                 </StackLayout>
                 <StackLayout Grid.Row="1">
-                    <Label Text="{Binding Receipt.GoogleResponse}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout>
+                            <Button Text="Pobierz JSON"
+                                    Command="{Binding GetRecognizedElements}" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <Button Text="Rozpoznaj Elementy"
+                                    Command="{Binding RecognizeReceipt}" />
+                        </StackLayout>
+                    </Grid>
                 </StackLayout>
                 <StackLayout Grid.Row="2"
                              BackgroundColor="CornflowerBlue">
                     <Image Source="{Binding Receipt.PicturePath, Converter={StaticResource FilePathConverter}}"></Image>
+                </StackLayout>
+                <StackLayout Grid.Row="3">
+                    <Label Text="{Binding Receipt.GoogleResponse}" />
                 </StackLayout>
             </Grid>
         </ScrollView>

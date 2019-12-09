@@ -22,5 +22,10 @@ namespace MobileApp.Model.Recognition
             Width = width;
             Height = height;
         }
+
+        public Point GetCentralPoint()
+        {
+            return new Point(X + Width / 2, Y + Height / 2);
+        }
     }
 }

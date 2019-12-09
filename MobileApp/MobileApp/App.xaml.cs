@@ -29,7 +29,6 @@ namespace MobileApp
             container.Register<IDialogService, DialogService>();
             container.Register<ICameraService, CameraService>();
             container.Register<IFileService, FileService>();
-            container.Register<IReceiptService, ReceiptService>();
 
             Container = container;
 

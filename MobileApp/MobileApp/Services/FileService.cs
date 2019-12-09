@@ -64,7 +64,12 @@ namespace MobileApp.Services
         {
             using var ms = new SKMemoryStream(imageBytes);
             using var original = SKBitmap.Decode(ms);
-            using var image = SKImage.FromBitmap(original);
+            var resizedHeight = original.Height > 2500 ? original.Height / 2 : original.Height;
+            var resizedWidth = original.Width > 2500 ? original.Width / 2 : original.Width;
+            var imageInfo = new SKImageInfo(resizedWidth, resizedHeight);
+            var resizedBitmap = new SKBitmap(imageInfo);
+            original.ScalePixels(resizedBitmap, SKFilterQuality.High);
+            using var image = SKImage.FromBitmap(resizedBitmap);
             await using var output = File.OpenWrite(path);
             image.Encode(SKEncodedImageFormat.Jpeg, compression).SaveTo(output);
         }

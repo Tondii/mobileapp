@@ -51,7 +51,7 @@ namespace MobileApp.ViewModels
                 CreateDateTime = DateTime.Now,
                 PicturePath = _fileService.GenerateImagePath()
             };
-            await _fileService.SaveImage(receipt.PicturePath, _imageBytes, 40);
+            await _fileService.SaveImage(receipt.PicturePath, _imageBytes, 50);
             await _dataService.AddReceiptAsync(receipt);
             await _navigationService.NavigateWithoutReturnTo(new MainPage());
         }

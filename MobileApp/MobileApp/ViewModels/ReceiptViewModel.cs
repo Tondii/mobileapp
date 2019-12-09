@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MobileApp.Database.DTO;
+using MobileApp.Model.Recognition;
 using MobileApp.Navigation;
 using MobileApp.Recognition;
 using MobileApp.Services;
 using MobileApp.Views;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace MobileApp.ViewModels
@@ -14,7 +17,6 @@ namespace MobileApp.ViewModels
     {
         private readonly IDataService _dataService;
         private readonly IFileService _fileService;
-        private readonly IReceiptService _receiptService;
         private readonly IRequestService _requestService;
         private readonly IDialogService _dialogService;
         private readonly INavigationService _navigationService;
@@ -33,15 +35,14 @@ namespace MobileApp.ViewModels
         }
 
         public ICommand GetRecognizedElements => new Command(async () => await RecognizeElements());
+        public ICommand RecognizeReceipt => new Command(async () => await RecognizeThisReceipt());
         public ICommand RemoveReceipt => new Command(async () => await RemoveThisReceipt());
-
         public ICommand EditComment => new Command(async () => await EditCommentAsync());
 
         public ReceiptViewModel()
         {
             _dataService = App.Container.GetInstance<IDataService>();
             _fileService = App.Container.GetInstance<IFileService>();
-            _receiptService = App.Container.GetInstance<IReceiptService>();
             _requestService = App.Container.GetInstance<IRequestService>();
             _dialogService = App.Container.GetInstance<IDialogService>();
             _navigationService = App.Container.GetInstance<INavigationService>();
@@ -58,6 +59,7 @@ namespace MobileApp.ViewModels
             var base64 = Convert.ToBase64String(bytes);
             var googleResponse = await _requestService.GetRecognizedWords(base64);
             var words = WordProcessor.ConvertGoogleResponse(googleResponse);
+            Receipt.GoogleResponse = JsonConvert.SerializeObject(words);
             RaisePropertyChanged(nameof(Receipt));
             await _dataService.UpdateReceiptAsync(Receipt);
         }
@@ -81,7 +83,17 @@ namespace MobileApp.ViewModels
             MessagingCenter.Subscribe<EditCommentViewModel>(this, "editedComment", model =>
             {
                 Receipt = _dataService.GetReceipt(model.Receipt.Id);
+                MessagingCenter.Unsubscribe<EditCommentViewModel>(this, "editedComment");
             });
+        }
+
+        private async Task RecognizeThisReceipt()
+        {
+            var words = JsonConvert.DeserializeObject<List<Word>>(Receipt.GoogleResponse);
+            var totalAmountRecognizer = new TotalAmountRecognizer(words);
+            Receipt.BruttoSummary = totalAmountRecognizer.GetTotalAmount();
+            RaisePropertyChanged(nameof(Receipt));
+            await _dataService.UpdateReceiptAsync(Receipt);
         }
     }
 }
