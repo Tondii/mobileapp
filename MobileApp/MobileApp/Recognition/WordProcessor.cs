@@ -13,6 +13,8 @@ namespace MobileApp.Recognition
 {
     internal class WordProcessor
     {
+        const string datePattern = @"^\d{4}-\d{2}-\d{2}$";
+
         public static List<Word> ConvertGoogleResponse(ResponseObject response)
         {
             var list = new List<Word>();
@@ -51,18 +53,69 @@ namespace MobileApp.Recognition
                     }
                 }
             }
-            var monetaryPattern = @"\d+[.,]?\d+|[.,]|\d+";
-            list = MergeSplitValues(list, monetaryPattern);
 
-            var postalCodePattern = @"\d{2}|[-]|\d{2}[-]";
-            return MergeSplitValues(list, postalCodePattern);
+
+            list = MergeSplitDates(list);
+
+            const string postalCodePattern = @"\d{2}|[-]|\d{2}[-]|^\d{3}";
+            list = MergeSplitValues(list, postalCodePattern);
+
+            const string monetaryPattern = @"\d+[.,]?\d+|[.,]|\d+";
+            return MergeSplitValues(list, monetaryPattern);
+        }
+
+        private static List<Word> MergeSplitDates(List<Word> words)
+        {
+            const string possiblePartOfDatePattern = @"^\d{4}[-]?$|^[-]?\d{2}$|^[-]?\d{2}[-]\d{2}$";
+
+            if (words.Any(x => Regex.IsMatch(x.Text, datePattern)))
+            {
+                return words;
+            }
+
+            var possiblePartOfDateWords = words.Where(x => Regex.IsMatch(x.Text, possiblePartOfDatePattern)).ToList();
+
+            var lines = GroupInLines(possiblePartOfDateWords);
+
+            var dateLines = new List<List<Word>>();
+
+            foreach (var line in lines)
+            {
+                var countOfCharacters = line.Sum(w => w.Text.Length);
+                if (countOfCharacters == 8 && line.First().Text.Length == 4)
+                {
+                    dateLines.Add(line.Take(3).ToList());
+                }
+            }
+
+            var buffer = Word.Empty;
+            var wordsToRemove = new List<Word>();
+            var newWords = new List<Word>();
+
+            foreach (var dateLine in dateLines)
+            {
+                foreach (var word in dateLine)
+                {
+                    wordsToRemove.Add(word);
+                    buffer += word;
+                    buffer.Text += "-";
+                }
+                buffer.Text = buffer.Text.Remove(buffer.Text.Length - 1, 1);
+                newWords.Add(buffer);
+            }
+
+            words = words.Except(wordsToRemove).ToList();
+            words = words.Concat(newWords).ToList();
+
+            return words;
         }
 
         private static List<Word> MergeSplitValues(List<Word> words, string pattern)
         {
-            var monetaryWords = words.Where(x => Regex.IsMatch(x.Text, pattern)).ToList();
+            var patternWords = words.Where(x => Regex.IsMatch(x.Text, pattern) && !Regex.IsMatch(x.Text, datePattern))
+                .ToList();
 
-            var lines = GroupInLines(monetaryWords);
+            var lines = GroupInLines(patternWords);
 
             foreach (var orderedLine in lines.Select(line => line.OrderBy(x => x.BoundingRect.X).ToList()))
             {
@@ -114,7 +167,7 @@ namespace MobileApp.Recognition
             return words;
         }
 
-        private static List<List<Word>> GroupInLines(List<Word> words)
+        public static List<List<Word>> GroupInLines(List<Word> words)
         {
             var lines = new List<List<Word>>();
 
@@ -126,24 +179,17 @@ namespace MobileApp.Recognition
 
             foreach (var word in words)
             {
-                if (nextLine.Count == 0)
+                if (BaseRecognizer.GetRelation(currentWord, word) == WordRelation.InLine
+                        && BaseRecognizer.GetPixelCorrespondingRatio(currentWord, word, WordRelation.InLine) > 0.7)
                 {
                     nextLine.Add(word);
-                    currentWord = word;
                 }
                 else
                 {
-                    if (BaseRecognizer.GetRelation(currentWord, word) == WordRelation.InLine
-                        && BaseRecognizer.GetPixelCorrespondingRatio(currentWord, word, WordRelation.InLine) > 0.7)
-                    {
-                        nextLine.Add(word);
-                    }
-                    else
-                    {
-                        lines.Add(nextLine);
-                        nextLine = new List<Word>();
-                    }
+                    lines.Add(nextLine);
+                    nextLine = new List<Word> { word };
                 }
+                currentWord = word;
             }
             return lines;
         }

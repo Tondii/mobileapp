@@ -9,5 +9,10 @@ namespace MobileApp.Extensions
         {
             return words.Any(text.Contains);
         }
+
+        public static bool StartsWithAny(this string text, IEnumerable<string> words)
+        {
+            return words.Any(text.StartsWith);
+        }
     }
 }

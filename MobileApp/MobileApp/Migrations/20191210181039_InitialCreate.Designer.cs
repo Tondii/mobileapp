@@ -9,8 +9,8 @@ using MobileApp.Database;
 namespace MobileApp.Migrations
 {
     [DbContext(typeof(SqliteDbContext))]
-    [Migration("20191203095252_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20191210181039_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,15 +23,13 @@ namespace MobileApp.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BuildingNumber");
+                    b.Property<string>("Address");
 
                     b.Property<string>("City");
 
                     b.Property<string>("Name");
 
                     b.Property<string>("PostalCode");
-
-                    b.Property<string>("Street");
 
                     b.Property<string>("VatIdentificationNumber");
 
@@ -45,18 +43,20 @@ namespace MobileApp.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<double>("BruttoSummary");
+                    b.Property<float>("BruttoSummary");
 
                     b.Property<string>("Comment")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<long?>("CompanyId");
+                    b.Property<long>("CompanyId");
 
                     b.Property<DateTime>("CreateDateTime");
 
                     b.Property<string>("GoogleResponse");
 
                     b.Property<string>("PicturePath");
+
+                    b.Property<DateTime?>("SaleDate");
 
                     b.HasKey("Id");
 
@@ -69,7 +69,8 @@ namespace MobileApp.Migrations
                 {
                     b.HasOne("MobileApp.Database.DTO.Company", "Company")
                         .WithMany()
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

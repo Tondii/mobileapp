@@ -55,13 +55,21 @@ namespace MobileApp.ViewModels
 
         private async Task RecognizeElements()
         {
-            var bytes = await _fileService.OpenFile(Receipt.PicturePath);
-            var base64 = Convert.ToBase64String(bytes);
-            var googleResponse = await _requestService.GetRecognizedWords(base64);
-            var words = WordProcessor.ConvertGoogleResponse(googleResponse);
-            Receipt.GoogleResponse = JsonConvert.SerializeObject(words);
-            RaisePropertyChanged(nameof(Receipt));
-            await _dataService.UpdateReceiptAsync(Receipt);
+            try
+            {
+                var bytes = await _fileService.OpenFile(Receipt.PicturePath);
+                var base64 = Convert.ToBase64String(bytes);
+                var googleResponse = await _requestService.GetRecognizedWords(base64);
+                var words = WordProcessor.ConvertGoogleResponse(googleResponse);
+                Receipt.GoogleResponse = JsonConvert.SerializeObject(words);
+                RaisePropertyChanged(nameof(Receipt));
+                await _dataService.UpdateReceiptAsync(Receipt);
+            }
+            catch (Exception ex)
+            {
+                await _dialogService.DisplayAlert("Brak dostępu do internetu!", ex.Message, "OK");
+            }
+
         }
 
         private async Task RemoveThisReceipt()
@@ -90,8 +98,16 @@ namespace MobileApp.ViewModels
         private async Task RecognizeThisReceipt()
         {
             var words = JsonConvert.DeserializeObject<List<Word>>(Receipt.GoogleResponse);
+
+            var dateRecognizer = new DateRecognizer(words);
+            Receipt.SaleDate = dateRecognizer.GetSaleDate();
+
             var totalAmountRecognizer = new TotalAmountRecognizer(words);
             Receipt.BruttoSummary = totalAmountRecognizer.GetTotalAmount();
+
+            var companyRecognizer = new CompanyRecognizer(words, Receipt.Company);
+            Receipt.Company = companyRecognizer.GetRecognizedCompany();
+
             RaisePropertyChanged(nameof(Receipt));
             await _dataService.UpdateReceiptAsync(Receipt);
         }

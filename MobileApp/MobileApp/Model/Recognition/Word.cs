@@ -22,6 +22,16 @@ namespace MobileApp.Model.Recognition
 
         public static Word operator +(Word w1, Word w2)
         {
+            if (w2.BoundingRect == null)
+            {
+                return w1;
+            }
+
+            if (w1.BoundingRect == null)
+            {
+                return w2;
+            }
+
             var x = Math.Min(w1.BoundingRect.X, w2.BoundingRect.X);
             var y = Math.Min(w1.BoundingRect.Y, w2.BoundingRect.Y);
             var width = Math.Max(w1.BoundingRect.Right, w2.BoundingRect.Right) - x;

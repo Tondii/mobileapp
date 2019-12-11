@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MobileApp.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,12 +13,11 @@ namespace MobileApp.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    VatIdentificationNumber = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Street = table.Column<string>(nullable: true),
-                    BuildingNumber = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    PostalCode = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
-                    PostalCode = table.Column<string>(nullable: true)
+                    VatIdentificationNumber = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -33,8 +32,9 @@ namespace MobileApp.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDateTime = table.Column<DateTime>(nullable: false),
                     PicturePath = table.Column<string>(nullable: true),
-                    CompanyId = table.Column<long>(nullable: true),
-                    BruttoSummary = table.Column<double>(nullable: false),
+                    SaleDate = table.Column<DateTime>(nullable: true),
+                    CompanyId = table.Column<long>(nullable: false),
+                    BruttoSummary = table.Column<float>(nullable: false),
                     Comment = table.Column<string>(type: "varchar(255)", nullable: true),
                     GoogleResponse = table.Column<string>(nullable: true)
                 },
@@ -46,7 +46,7 @@ namespace MobileApp.Migrations
                         column: x => x.CompanyId,
                         principalTable: "Companies",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

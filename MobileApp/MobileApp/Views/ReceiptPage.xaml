@@ -37,6 +37,13 @@
                     <Label Text="{Binding Receipt.Comment}" />
                     <Label Text="Brutto: " />
                     <Label Text="{Binding Receipt.BruttoSummary}" />
+                    <Label Text="Firma: " />
+                    <Label Text="{Binding Receipt.Company.PostalCode}" />
+                    <Label Text="{Binding Receipt.Company.City}" />
+                    <Label Text="{Binding Receipt.Company.Address}" />
+                    <Label Text="{Binding Receipt.Company.VatIdentificationNumber}" />
+                    <Label Text="{Binding Receipt.Company.Name}" />
+                    <Label Text="{Binding Receipt.SaleDate}" />
                 </StackLayout>
                 <StackLayout Grid.Row="1">
                     <Grid>

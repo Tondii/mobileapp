@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using MobileApp.Database;
 using MobileApp.Database.DTO;
 
@@ -17,12 +18,12 @@ namespace MobileApp.Services
 
         public IEnumerable<Receipt> GetAllReceipts()
         {
-            return _context.Receipts.ToList();
+            return _context.Receipts.Include(r => r.Company).ToList();
         }
 
         public Receipt GetReceipt(long id)
         {
-            return _context.Receipts.FirstOrDefault(r => r.Id == id);
+            return _context.Receipts.Include(r => r.Company).FirstOrDefault(r => r.Id == id);
         }
 
         public long AddReceipt(Receipt receipt)
