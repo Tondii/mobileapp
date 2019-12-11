@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using Acr.UserDialogs;
 using Xamarin.Forms;
 
 namespace MobileApp.Services
@@ -7,13 +9,18 @@ namespace MobileApp.Services
     {
         public async Task<bool> DisplayAgreementAlert(string title, string message, string accept, string cancel)
         {
-            return await Application.Current.MainPage.DisplayAlert(title, message, accept, cancel);
+            return await UserDialogs.Instance.ConfirmAsync(message, title, accept, cancel);
         }
 
         public async Task DisplayAlert(string title, string message, string buttonText)
         {
-            await Application.Current.MainPage.DisplayAlert(title, message, buttonText);
+            await UserDialogs.Instance.AlertAsync(message, title, buttonText);
         }
 
+        public async Task<string> DisplaySearchAlert(string title, string message, string accept, string cancel,
+            string placeholder)
+        {
+            return (await UserDialogs.Instance.PromptAsync(message, title, accept, cancel, placeholder)).Text;
+        }
     }
 }

@@ -6,9 +6,9 @@
              xmlns:converters="clr-namespace:MobileApp.Converters;assembly=MobileApp"
              xmlns:vm="clr-namespace:MobileApp.ViewModels;assembly=MobileApp"
              mc:Ignorable="d"
-             x:Class="MobileApp.Views.MainPage">
+             x:Class="MobileApp.Views.FilteredListPage">
     <ContentPage.BindingContext>
-        <vm:MainViewModel />
+        <vm:FilteredListViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -68,12 +68,5 @@
             </ListView>
 
         </StackLayout>
-        <ImageButton Source="outline_add_white_48.png"
-                     BackgroundColor="{StaticResource PrimaryColor}"
-                     CornerRadius="30"
-                     Padding="10"
-                     AbsoluteLayout.LayoutFlags="PositionProportional"
-                     Command="{Binding SelectImageSource}"
-                     AbsoluteLayout.LayoutBounds=".95,.95,60,60" />
     </AbsoluteLayout>
 </ContentPage>

@@ -6,5 +6,7 @@ namespace MobileApp.Services
     {
         Task DisplayAlert(string title, string message, string buttonText);
         Task<bool> DisplayAgreementAlert(string title, string message, string accept, string cancel);
+        Task<string> DisplaySearchAlert(string title, string message, string accept, string cancel,
+            string placeholder);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json;
 
 namespace MobileApp.Database.DTO
 {
@@ -18,7 +17,7 @@ namespace MobileApp.Database.DTO
         public float BruttoSummary { get; set; }
 
         [Column(TypeName = "varchar(255)")]
-        public string Comment { get; set; }
+        public string Comment { get; set; } = string.Empty;
         public string GoogleResponse { get; set; }
     }
 }

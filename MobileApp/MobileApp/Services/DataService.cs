@@ -18,7 +18,7 @@ namespace MobileApp.Services
 
         public IEnumerable<Receipt> GetAllReceipts()
         {
-            return _context.Receipts.Include(r => r.Company).ToList();
+            return _context.Receipts.Include(r => r.Company);
         }
 
         public Receipt GetReceipt(long id)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Acr.UserDialogs;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -25,6 +26,7 @@ namespace MobileApp.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            UserDialogs.Init(this);
 
             var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "database.sqlite");
             LoadApplication(new App(dbPath));

@@ -6,10 +6,11 @@ namespace MobileApp.Database.DTO
     {
         [Key]
         public long Id { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string PostalCode { get; set; }
-        public string City { get; set; }
-        public string VatIdentificationNumber { get; set; }
+
+        public string Name { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public string PostalCode { get; set; } = string.Empty;
+        public string City { get; set; } = string.Empty;
+        public string VatIdentificationNumber { get; set; } = string.Empty;
     }
 }
