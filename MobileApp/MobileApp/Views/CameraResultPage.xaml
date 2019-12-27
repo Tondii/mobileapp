@@ -7,12 +7,22 @@
              mc:Ignorable="d"
              x:Class="MobileApp.Views.CameraResultPage">
     <ContentPage.BindingContext>
-        <vm:CameraResultViewModel/>
+        <vm:CameraResultViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Image x:Name="ResultImage" Source="{Binding Image}"></Image>
-            <Button Command="{Binding AddNewReceipt}" Text="Dodaj nowy paragon"/>
+            <Frame Margin="10"
+                   Padding="10"
+                   HasShadow="False"
+                   BorderColor="Gray"
+                   CornerRadius="5"
+                   BackgroundColor="White">
+                <Image x:Name="ResultImage"
+                       Source="{Binding Image}" />
+            </Frame>
+            <Button Margin="10,0,10,0"
+                    Command="{Binding AddNewReceipt}"
+                    Text="Dodaj nowy paragon" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

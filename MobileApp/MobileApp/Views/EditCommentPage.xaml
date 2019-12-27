@@ -10,11 +10,16 @@
         <vm:EditCommentViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <Entry x:Name="CommentEntry"
-                   Text="{Binding Receipt.Comment, Mode=TwoWay}" />
-            <Button Text="Edytuj"
-                    Command="{Binding EditComment}" />
-        </StackLayout>
+        <Frame>
+            <StackLayout>
+                <Label Text="Komentarz:"
+                       FontSize="Medium" />
+                <Entry x:Name="CommentEntry"
+                       Text="{Binding Receipt.Comment, Mode=TwoWay}" />
+                <Button Margin="50,0,50,0"
+                        Text="Edytuj"
+                        Command="{Binding EditComment}" />
+            </StackLayout>
+        </Frame>
     </ContentPage.Content>
 </ContentPage>

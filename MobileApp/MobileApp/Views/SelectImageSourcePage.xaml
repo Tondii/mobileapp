@@ -10,13 +10,30 @@
         <vm:SelectImageSourceViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Center">
-            <ImageButton Source="outline_photo_camera_white_48.png"
-                         BackgroundColor="{StaticResource PrimaryColor}"
-                         Command="{Binding TakePhoto}" />
-            <ImageButton Source="outline_attach_file_white_48.png"
-                         BackgroundColor="{StaticResource PrimaryColor}"
-                         Command="{Binding PickImage}" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*" />
+                <RowDefinition Height="20*" />
+                <RowDefinition Height="20*" />
+                <RowDefinition Height="20*" />
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="1"
+                         VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="CenterAndExpand">
+                <ImageButton Source="outline_photo_camera_white_48.png"
+                             Padding="40"
+                             BackgroundColor="{StaticResource PrimaryColor}"
+                             Command="{Binding TakePhoto}" />
+            </StackLayout>
+            <StackLayout Grid.Row="2"
+                         VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="CenterAndExpand">
+                <ImageButton Source="outline_attach_file_white_48.png"
+                             Padding="40"
+                             BackgroundColor="{StaticResource PrimaryColor}"
+                             Command="{Binding PickImage}" />
+            </StackLayout>
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Globalization;
+using Microsoft.EntityFrameworkCore;
 using MobileApp.Database;
 using MobileApp.Services;
 using MobileApp.Views;
@@ -15,6 +16,7 @@ namespace MobileApp
         public App(string dbPath)
         {
             InitializeComponent();
+            CultureInfo.CurrentUICulture = new CultureInfo("pl-pl");
             DbPath = dbPath;
             using var context = SqliteContextFactory.CreateDbContext();
             context.Database.Migrate();

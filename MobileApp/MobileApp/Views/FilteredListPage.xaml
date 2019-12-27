@@ -13,6 +13,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:FilePathToImageConverter x:Key="FilePathConverter" />
+            <converters:DateConverter x:Key="DateConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -47,9 +48,28 @@
                                     </Grid.ColumnDefinitions>
                                     <StackLayout VerticalOptions="CenterAndExpand"
                                                  Orientation="Vertical">
-                                        <Label Text="{Binding Id}"
-                                               FontAttributes="Bold"
-                                               FontSize="Medium" />
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="5*" />
+                                                <ColumnDefinition Width="5*" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackLayout>
+                                                <Label Text="Data" />
+                                                <Label Text="{Binding SaleDate, Converter={StaticResource DateConverter}}"
+                                                       FontAttributes="Bold"
+                                                       FontSize="Small" />
+                                            </StackLayout>
+                                            <StackLayout Grid.Column="1">
+                                                <Label Text="Kwota" />
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding BruttoSummary}"
+                                                           FontAttributes="Bold"
+                                                           FontSize="Small" />
+                                                    <Label Text="PLN"
+                                                           FontSize="Small" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </Grid>
                                     </StackLayout>
                                     <Frame Grid.Column="1"
                                            CornerRadius="5"

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MobileApp.ViewModels.BaseViewModel">
+    <Position X="4.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MobileApp.ViewModels.CameraResultViewModel">
+    <Position X="2.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAIAAAJAIAAAAAAAAAABgAAIAAgAAAAAA=</HashCode>
+      <FileName>ViewModels\CameraResultViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MobileApp.ViewModels.MainViewModel">
+    <Position X="6.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAABAAAAAAGAAAAAIAAAAAAAAAAEAAwAAQAAAAABAAA=</HashCode>
+      <FileName>ViewModels\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MobileApp.ViewModels.FilteredListViewModel">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAgAAIAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\FilteredListViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MobileApp.ViewModels.ReceiptViewModel">
+    <Position X="4.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACCAIAEAIAIIAIAAAGAAAAQAAKAIAACCAAA=</HashCode>
+      <FileName>ViewModels\ReceiptViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MobileApp.ViewModels.EditCommentViewModel">
+    <Position X="8.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAIAIAAAAAAEAAAAAAAKAAAACAAAA=</HashCode>
+      <FileName>ViewModels\EditCommentViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MobileApp.ViewModels.SelectImageSourceViewModel">
+    <Position X="10.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAIAAAMAAAAAAAgAAAAEQAAAAAAAAAAAg=</HashCode>
+      <FileName>ViewModels\SelectImageSourceViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

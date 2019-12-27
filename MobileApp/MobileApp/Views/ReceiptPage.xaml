@@ -13,6 +13,8 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:FilePathToImageConverter x:Key="FilePathConverter" />
+            <converters:DateConverter x:Key="DateConverter" />
+            <converters:IsNotEmptyConverter x:Key="NotEmptyConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -29,45 +31,84 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <StackLayout BackgroundColor="Orange">
-                    <Label Text="{Binding Receipt.Id}" />
-                    <Label Text="{Binding Receipt.Comment}" />
-                    <Label Text="Brutto: " />
-                    <Label Text="{Binding Receipt.BruttoSummary}" />
-                    <Label Text="Firma: " />
-                    <Label Text="{Binding Receipt.Company.PostalCode}" />
-                    <Label Text="{Binding Receipt.Company.City}" />
-                    <Label Text="{Binding Receipt.Company.Address}" />
-                    <Label Text="{Binding Receipt.Company.VatIdentificationNumber}" />
-                    <Label Text="{Binding Receipt.Company.Name}" />
-                    <Label Text="{Binding Receipt.SaleDate}" />
-                </StackLayout>
-                <StackLayout Grid.Row="1">
+                <StackLayout>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50*" />
-                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="5*" />
                         </Grid.ColumnDefinitions>
-                        <StackLayout>
-                            <Button Text="Pobierz JSON"
-                                    Command="{Binding GetRecognizedElements}" />
-                        </StackLayout>
-                        <StackLayout Grid.Column="1">
-                            <Button Text="Rozpoznaj Elementy"
-                                    Command="{Binding RecognizeReceipt}" />
-                        </StackLayout>
+                        <Frame Margin="10,10,0,0"
+                               HasShadow="False"
+                               BorderColor="Gray"
+                               CornerRadius="5"
+                               BackgroundColor="White">
+                            <StackLayout>
+                                <Label Text="Brutto:"
+                                       FontAttributes="Bold" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Receipt.BruttoSummary}" />
+                                    <Label Text="PLN"></Label>
+                                </StackLayout>
+
+                            </StackLayout>
+                        </Frame>
+                        <Frame Grid.Column="1"
+                               Margin="0,10,10,0"
+                               HasShadow="False"
+                               BorderColor="Gray"
+                               CornerRadius="5"
+                               BackgroundColor="White">
+                            <StackLayout>
+                                <Label Text="Data:"
+                                       FontAttributes="Bold" />
+                                <Label Text="{Binding Receipt.SaleDate, Converter={StaticResource DateConverter}}" />
+                            </StackLayout>
+                        </Frame>
                     </Grid>
+                    <Frame Margin="10,0,10,0"
+                           HasShadow="False"
+                           BorderColor="Gray"
+                           CornerRadius="5"
+                           BackgroundColor="White">
+                        <StackLayout>
+                            <Label Text="Sprzedawca:"
+                                   FontAttributes="Bold" />
+                            <Label Text="{Binding Receipt.Company.Name}" />
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Receipt.Company.PostalCode}" />
+                                <Label Text="{Binding Receipt.Company.City}" />
+                                <Label Text="{Binding Receipt.Company.Address}" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="NIP:" />
+                                <Label Text="{Binding Receipt.Company.VatIdentificationNumber}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <Frame IsVisible="{Binding Receipt.Comment, Converter={StaticResource NotEmptyConverter}}"
+                           Margin="10,0,10,0"
+                           HasShadow="False"
+                           BorderColor="Gray"
+                           CornerRadius="5"
+                           BackgroundColor="White">
+                        <StackLayout>
+                            <Label Text="Komentarz:"
+                                   FontAttributes="Bold" />
+                            <Label Text="{Binding Receipt.Comment}" />
+                        </StackLayout>
+                    </Frame>
                 </StackLayout>
-                <StackLayout Grid.Row="2"
-                             BackgroundColor="CornflowerBlue">
+                <Frame Grid.Row="1"
+                       Margin="10,0,10,10"
+                       Padding="10"
+                       HasShadow="False"
+                       BorderColor="Gray"
+                       CornerRadius="5"
+                       BackgroundColor="White">
                     <Image Source="{Binding Receipt.PicturePath, Converter={StaticResource FilePathConverter}}"></Image>
-                </StackLayout>
-                <StackLayout Grid.Row="3">
-                    <Label Text="{Binding Receipt.GoogleResponse}" />
-                </StackLayout>
+                </Frame>
             </Grid>
         </ScrollView>
     </ContentPage.Content>

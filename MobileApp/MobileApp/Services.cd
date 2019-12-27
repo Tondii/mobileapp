@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MobileApp.Services.FileService" Collapsed="true">
+    <Position X="2.75" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAQAAAAAAAAAAAAAAAAAACEQABAEAABAAABA=</HashCode>
+      <FileName>Services\FileService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MobileApp.Services.NavigationService" Collapsed="true">
+    <Position X="7.75" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAEAAAAAAAAGAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Services\NavigationService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MobileApp.Services.PermissionService" Collapsed="true">
+    <Position X="3.5" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Services\PermissionService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MobileApp.Services.RequestService" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAgAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Services\RequestService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MobileApp.Services.CameraService" Collapsed="true">
+    <Position X="1.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Services\CameraService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MobileApp.Services.DataService" Collapsed="true">
+    <Position X="4.75" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAIAAAAAAAhAAAAAAAgAABAAAAAAAAAAAoAAAAAAA=</HashCode>
+      <FileName>Services\DataService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MobileApp.Services.DialogService" Collapsed="true">
+    <Position X="6.75" Y="8" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\DialogService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="MobileApp.Services.IPermissionService">
+    <Position X="3.5" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Services\IPermissionService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MobileApp.Services.IRequestService">
+    <Position X="5.75" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\IRequestService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MobileApp.Services.IFileService">
+    <Position X="2.75" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAQAAAAAAAAAAAAAAAAAACEQABAEAAAAAABA=</HashCode>
+      <FileName>Services\IFileService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MobileApp.Services.INavigationService">
+    <Position X="7.75" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAEAAAAAAAACAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Services\INavigationService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MobileApp.Services.ICameraService">
+    <Position X="1.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ICameraService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MobileApp.Services.IDataService">
+    <Position X="4.75" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAIAAAAAAAgAAAAAAAgAABAAAAAAAAAAAoAAAAAAA=</HashCode>
+      <FileName>Services\IDataService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MobileApp.Services.IDialogService">
+    <Position X="6.75" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\IDialogService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
