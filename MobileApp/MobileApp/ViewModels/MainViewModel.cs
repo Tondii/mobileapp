@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -19,7 +20,7 @@ namespace MobileApp.ViewModels
         public ICommand SelectImageSource =>
             new Command(async () => await _navigationService.NavigateTo(new SelectImageSourcePage()));
         public ICommand SearchReceipts => new Command(async () => await SearchReceiptsAsync());
-        public ICommand FilterReceipts => new Command(() => { });
+        public ICommand FilterReceipts => new Command(async () => await FilterReceiptsAsync());
 
         public ObservableCollection<Receipt> Receipts
         {
@@ -29,6 +30,19 @@ namespace MobileApp.ViewModels
                 _receipts = value;
                 RaisePropertyChanged();
             }
+        }
+
+        public MainViewModel()
+        {
+            _navigationService = App.Container.GetInstance<INavigationService>();
+            _dialogService = App.Container.GetInstance<IDialogService>();
+            var dataService = App.Container.GetInstance<IDataService>();
+            Receipts = new ObservableCollection<Receipt>(dataService.GetAllReceipts().OrderByDescending(x => x.CreateDateTime));
+        }
+        protected MainViewModel(bool onlyServices)
+        {
+            _navigationService = App.Container.GetInstance<INavigationService>();
+            _dialogService = App.Container.GetInstance<IDialogService>();
         }
 
         public Receipt SelectedReceipt
@@ -48,23 +62,6 @@ namespace MobileApp.ViewModels
                 SelectedReceipt = null;
             }
         }
-
-        public MainViewModel()
-        {
-            _navigationService = App.Container.GetInstance<INavigationService>();
-            _dialogService = App.Container.GetInstance<IDialogService>();
-            var dataService = App.Container.GetInstance<IDataService>();
-            Receipts = new ObservableCollection<Receipt>(dataService.GetAllReceipts().OrderByDescending(x => x.CreateDateTime));
-        }
-
-        protected MainViewModel(bool onlyServices)
-        {
-            _navigationService = App.Container.GetInstance<INavigationService>();
-            _dialogService = App.Container.GetInstance<IDialogService>();
-        }
-
-
-
         private void ReceiptSelected(Receipt receipt)
         {
             _navigationService.NavigateTo(new ReceiptPage(), receipt);
@@ -72,8 +69,14 @@ namespace MobileApp.ViewModels
 
         protected async Task SearchReceiptsAsync()
         {
-            var searchText =
+            var searchResult =
                 await _dialogService.DisplaySearchAlert("", "Wyszukaj paragon", "OK", "Anuluj", "Wyszukaj...");
+            if (!searchResult.Ok)
+            {
+                return;
+            }
+
+            var searchText = searchResult.Text;
             if (string.IsNullOrEmpty(searchText))
             {
                 return;
@@ -85,7 +88,24 @@ namespace MobileApp.ViewModels
 
             if (searchedReceipts.Any())
             {
-                await _navigationService.NavigateTo(new FilteredListPage(), new ObservableCollection<Receipt>(searchedReceipts));
+                await _navigationService.NavigateTo(new FilteredListPage(),
+                    new ObservableCollection<Receipt>(searchedReceipts));
+            }
+        }
+        protected async Task FilterReceiptsAsync()
+        {
+            var promptResult = await _dialogService.DisplayDatePrompt("Wybierz dzień", "OK", "Anuluj");
+            if (!promptResult.Ok)
+            {
+                return;
+            }
+            var date = promptResult.SelectedDate;
+            var filteredReceipts = Receipts.Where(r => r.SaleDate.GetValueOrDefault(DateTime.MinValue) == date.Date).ToList();
+
+            if (filteredReceipts.Any())
+            {
+                await _navigationService.NavigateTo(new FilteredListPage(),
+                    new ObservableCollection<Receipt>(filteredReceipts));
             }
         }
     }

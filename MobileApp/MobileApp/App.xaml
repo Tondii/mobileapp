@@ -11,5 +11,6 @@
         <Color x:Key="DarkColor">#087f23</Color>
         <Color x:Key="BackgroundColor">#E1E2E1</Color>
         <Color x:Key="LightBackgroundColor">#F5F5F6</Color>
+        <Color x:Key="TransparentLightBackgroundColor">#80F5F5F6</Color>
     </Application.Resources>
 </Application>

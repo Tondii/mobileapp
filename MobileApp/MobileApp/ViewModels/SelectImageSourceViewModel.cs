@@ -43,7 +43,6 @@ namespace MobileApp.ViewModels
                 await _dialogService.DisplayAlert("Permission denied", ex.ToString(), "OK");
             }
         }
-
         private async Task PickImageAsync()
         {
             try

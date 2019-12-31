@@ -1,7 +1,6 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
-using Xamarin.Forms;
 
 namespace MobileApp.Services
 {
@@ -17,10 +16,23 @@ namespace MobileApp.Services
             await UserDialogs.Instance.AlertAsync(message, title, buttonText);
         }
 
-        public async Task<string> DisplaySearchAlert(string title, string message, string accept, string cancel,
+        public async Task<PromptResult> DisplaySearchAlert(string title, string message, string accept, string cancel,
             string placeholder)
         {
-            return (await UserDialogs.Instance.PromptAsync(message, title, accept, cancel, placeholder)).Text;
+            return await UserDialogs.Instance.PromptAsync(message, title, accept, cancel, placeholder);
+        }
+
+        public async Task<DatePromptResult> DisplayDatePrompt(string title, string accept, string cancel)
+        {
+            var datePromptConfig = new DatePromptConfig
+            {
+                Title = title,
+                CancelText = cancel,
+                OkText = accept,
+                SelectedDate = DateTime.Today,
+                UnspecifiedDateTimeKindReplacement = DateTimeKind.Local
+            };
+            return await UserDialogs.Instance.DatePromptAsync(datePromptConfig);
         }
     }
 }

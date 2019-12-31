@@ -10,6 +10,7 @@ namespace MobileApp.ViewModels
     internal class FilteredListViewModel : MainViewModel, IParameterized<ObservableCollection<Receipt>>
     {
         public new ICommand SearchReceipts => new Command(async () => await SearchReceiptsAsync());
+        public new ICommand FilterReceipts => new Command(async () => await FilterReceiptsAsync());
         public FilteredListViewModel() : base(true)
         {
 

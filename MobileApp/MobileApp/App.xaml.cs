@@ -16,7 +16,6 @@ namespace MobileApp
         public App(string dbPath)
         {
             InitializeComponent();
-            CultureInfo.CurrentUICulture = new CultureInfo("pl-pl");
             DbPath = dbPath;
             using var context = SqliteContextFactory.CreateDbContext();
             context.Database.Migrate();

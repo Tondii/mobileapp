@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using MobileApp.Extensions;
@@ -42,7 +43,8 @@ namespace MobileApp.Recognition
 
             if (rightWord != null && IsValidAmount(rightWord.Text))
             {
-                return float.Parse(Regex.Replace(rightWord.Text, ",", "."));
+                return float.Parse(Regex.Replace(rightWord.Text, ",", "."), NumberStyles.Any,
+                    CultureInfo.InvariantCulture);
             }
             return 0.00F;
         }
