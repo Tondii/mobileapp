@@ -81,7 +81,8 @@
                                 <Label Text="{Binding Receipt.Company.City}" />
                                 <Label Text="{Binding Receipt.Company.Address}" />
                             </StackLayout>
-                            <StackLayout Orientation="Horizontal">
+                            <StackLayout Orientation="Horizontal"
+                                         IsVisible="{Binding Receipt.Company.VatIdentificationNumber, Converter={StaticResource NotEmptyConverter}}">
                                 <Label Text="NIP:" />
                                 <Label Text="{Binding Receipt.Company.VatIdentificationNumber}" />
                             </StackLayout>

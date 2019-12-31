@@ -98,7 +98,7 @@ namespace MobileApp.Recognition
 
         private void GetVatIdentificationNumber()
         {
-            _vatIdNumberWord = _words.First(w => ValidateNip(w.Text));
+            _vatIdNumberWord = _words.FirstOrDefault(w => ValidateNip(w.Text));
         }
 
         private void GetCity()

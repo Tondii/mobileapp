@@ -23,7 +23,7 @@
                 </Frame>
                 <Button Margin="10,0,10,0"
                         Command="{Binding AddNewReceipt}"
-                        Text="Dodaj nowy paragon" />
+                        Text="Dodaj ten paragon" />
             </StackLayout>
             <StackLayout BackgroundColor="{StaticResource TransparentLightBackgroundColor}"
                          IsVisible="{Binding IsProcessing}"
