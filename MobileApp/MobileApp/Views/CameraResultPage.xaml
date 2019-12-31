@@ -11,20 +11,23 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <AbsoluteLayout>
-            <StackLayout>
-                <Frame Margin="10"
-                       Padding="10"
-                       HasShadow="False"
-                       BorderColor="Gray"
-                       CornerRadius="5"
-                       BackgroundColor="White">
-                    <Image x:Name="ResultImage"
-                           Source="{Binding Image}" />
-                </Frame>
-                <Button Margin="10,0,10,0"
-                        Command="{Binding AddNewReceipt}"
-                        Text="Dodaj ten paragon" />
-            </StackLayout>
+            <ScrollView AbsoluteLayout.LayoutFlags="All"
+                        AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout>
+                    <Frame Margin="10"
+                           Padding="10"
+                           HasShadow="False"
+                           BorderColor="Gray"
+                           CornerRadius="5"
+                           BackgroundColor="White">
+                        <Image x:Name="ResultImage"
+                               Source="{Binding Image}" />
+                    </Frame>
+                    <Button Margin="10,0,10,10"
+                            Command="{Binding AddNewReceipt}"
+                            Text="Dodaj ten paragon" />
+                </StackLayout>
+            </ScrollView>
             <StackLayout BackgroundColor="{StaticResource TransparentLightBackgroundColor}"
                          IsVisible="{Binding IsProcessing}"
                          AbsoluteLayout.LayoutFlags="All"
@@ -32,7 +35,7 @@
                 <ActivityIndicator IsRunning="True"
                                    VerticalOptions="FillAndExpand"
                                    HorizontalOptions="Center"
-                                   Color="{StaticResource DarkColor}"/>
+                                   Color="{StaticResource DarkColor}" />
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>
