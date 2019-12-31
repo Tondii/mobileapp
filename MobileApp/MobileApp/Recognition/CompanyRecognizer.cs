@@ -84,7 +84,7 @@ namespace MobileApp.Recognition
         {
             var lines = WordProcessor.GroupInLines(_words);
 
-            var firstLine = lines[0];
+            var firstLine = lines[0].OrderBy(word => word.BoundingRect.X).ToList();
 
             var buffer = Word.Empty;
             firstLine.ForEach(w =>

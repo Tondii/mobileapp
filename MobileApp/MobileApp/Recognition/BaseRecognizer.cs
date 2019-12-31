@@ -55,16 +55,16 @@ namespace MobileApp.Recognition
                 return WordRelation.NoExists;
             }
 
-            if (w1.BoundingRect.X >= w2.BoundingRect.Left && w1.BoundingRect.X <= w2.BoundingRect.Right
-                || w2.BoundingRect.X >= w1.BoundingRect.Left && w2.BoundingRect.X <= w1.BoundingRect.Right)
-            {
-                return WordRelation.InColumn;
-            }
-
             if (w1.BoundingRect.Y >= w2.BoundingRect.Top && w1.BoundingRect.Y <= w2.BoundingRect.Bottom
                 || w2.BoundingRect.Y >= w1.BoundingRect.Top && w2.BoundingRect.Y <= w1.BoundingRect.Bottom)
             {
                 return WordRelation.InLine;
+            }
+
+            if (w1.BoundingRect.X >= w2.BoundingRect.Left && w1.BoundingRect.X <= w2.BoundingRect.Right
+                || w2.BoundingRect.X >= w1.BoundingRect.Left && w2.BoundingRect.X <= w1.BoundingRect.Right)
+            {
+                return WordRelation.InColumn;
             }
 
             return WordRelation.NoRelation;
