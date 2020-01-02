@@ -75,13 +75,23 @@ namespace MobileApp.ViewModels
             await _fileService.SaveImage(_receipt.PicturePath, _imageBytes, 50);
             try
             {
-                await RecognizeElements();
+                try
+                {
+                    await RecognizeElements();
+                }
+                catch (Exception)
+                {
+                    IsProcessing = false;
+                    await _dialogService.DisplayAlert("Brak dostępu do Internetu!",
+                        "Aplikacja potrzebuje dostęp do Internetu, aby przetworzyć Twój paragon.", "OK");
+                    return;
+                }
                 RecognizeReceipt();
             }
             catch (Exception ex)
             {
                 IsProcessing = false;
-                await _dialogService.DisplayAlert("Błąd rozpoznawania paragonu", ex.Message, "OK");
+                await _dialogService.DisplayAlert("Błąd rozpoznawania paragonu!", ex.Message, "OK");
                 return;
             }
             await _dataService.AddReceiptAsync(_receipt);
@@ -91,18 +101,11 @@ namespace MobileApp.ViewModels
 
         private async Task RecognizeElements()
         {
-            try
-            {
-                var bytes = await _fileService.OpenFile(_receipt.PicturePath);
-                var base64 = Convert.ToBase64String(bytes);
-                var googleResponse = await _requestService.GetRecognizedWords(base64);
-                var words = WordProcessor.ConvertGoogleResponse(googleResponse);
-                _receipt.GoogleResponse = JsonConvert.SerializeObject(words);
-            }
-            catch (Exception ex)
-            {
-                await _dialogService.DisplayAlert("Brak dostępu do internetu!", ex.Message, "OK");
-            }
+            var bytes = await _fileService.OpenFile(_receipt.PicturePath);
+            var base64 = Convert.ToBase64String(bytes);
+            var googleResponse = await _requestService.GetRecognizedWords(base64);
+            var words = WordProcessor.ConvertGoogleResponse(googleResponse);
+            _receipt.GoogleResponse = JsonConvert.SerializeObject(words);
         }
 
         private void RecognizeReceipt()
